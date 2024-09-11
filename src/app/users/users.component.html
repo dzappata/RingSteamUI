@@ -1,0 +1,18 @@
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>E-Mail</th>
+      <th>Phone number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td><span>{{user.username}}</span></td>
+      <td><span>{{user.emailaddress}}</span></td>
+      <td><span>{{user.phonenumber}}</span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
