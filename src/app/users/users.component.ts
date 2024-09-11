@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {NgForOf} from "@angular/common";
 
 export class User {
   constructor(
@@ -14,7 +15,9 @@ export class User {
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
