@@ -1,4 +1,10 @@
 <div class="container">
+  <!--
+   <div class="border">
+    <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+      <i class="fa fa-user"></i>New Game</button>
+  </div>
+  -->
   <table class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -6,6 +12,7 @@
       <th>Year</th>
       <th>Rating</th>
       <th>Cost</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -14,7 +21,96 @@
       <td><span>{{game.year}}</span></td>
       <td><span>{{game.rating}}</span></td>
       <td><span>{{game.cost}}</span></td>
+      <td>
+        <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, game)">
+          <i class="fa fa-search"></i>Details</button>
+        <button class="btn btn-sm btn-warning">
+          <i class="fa fa-edit"></i>Add</button>
+      </td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Game</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <div class="input-group">
+          <input id="title" name="title" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="year">Year</label>
+        <div class="input-group">
+          <input id="year" name="year" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <div class="input-group">
+          <input id="rating" name="rating" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cost">Cost</label>
+        <div class="input-group">
+          <input id="cost" name="cost" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #contentDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title1">Game details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <div class="input-group">
+          <input id="title2" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="year">Year</label>
+        <div class="input-group">
+          <input id="year2" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <div class="input-group">
+          <input id="rating2" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Cost</label>
+        <div class="input-group">
+          <input id="cost2" class="form-control" readonly>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
