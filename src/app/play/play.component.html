@@ -17,7 +17,7 @@
       <td><span>{{game.cost}}</span></td>
       <td>
         <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, game)">
-          <i class="fa fa-search"></i>Details</button>
+          <i class="fa fa-search"></i>Hours played</button>
       </td>
     </tr>
     </tbody>
@@ -34,27 +34,9 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="hour">Hours</label>
         <div class="input-group">
-          <input id="title2" class="form-control" readonly>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="year">Year</label>
-        <div class="input-group">
-          <input id="year2" class="form-control" readonly>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="rating">Rating</label>
-        <div class="input-group">
-          <input id="rating2" class="form-control" readonly>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Cost</label>
-        <div class="input-group">
-          <input id="cost2" class="form-control" readonly>
+          <input id="hour2" class="form-control" readonly>
         </div>
       </div>
     </form>

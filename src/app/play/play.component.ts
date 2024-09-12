@@ -3,6 +3,7 @@ import {FormsModule, ReactiveFormsModule, NgForm} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {response} from "express";
 
 export class Game {
   constructor(
@@ -14,6 +15,7 @@ export class Game {
   ) {
   }
 }
+
 @Component({
   selector: 'app-play',
   standalone: true,
@@ -29,6 +31,7 @@ export class PlayComponent  implements OnInit{
   games: Game[] | undefined;
   closeResult: string | undefined;
   private gameId : number | undefined;
+  private totalhours: number | undefined;
 
   constructor(
     private httpClient: HttpClient,
@@ -69,19 +72,23 @@ export class PlayComponent  implements OnInit{
   }
 
   openDetails(targetModal: any, game: Game) {
+    this.gameId = game.id;
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
       size: 'lg'
     });
+
     // @ts-ignore
-    document.getElementById('title2').setAttribute('value', game.title);
+    this.httpClient.get<any>('http://localhost:8080/users/1/' + this.gameId+ '/totalhours').subscribe(
+      response => {
+        console.log(response);
+        this.totalhours =response;
+      }
+    );
+
     // @ts-ignore
-    document.getElementById('year2').setAttribute('value', game.year);
-    // @ts-ignore
-    document.getElementById('rating2').setAttribute('value', String(game.rating));
-    // @ts-ignore
-    document.getElementById('cost2').setAttribute('value', String(game.cost));
+    document.getElementById('hour2').setAttribute('value', this.totalhours);
   }
 
 }
