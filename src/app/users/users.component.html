@@ -5,6 +5,7 @@
       <th>Username</th>
       <th>E-Mail</th>
       <th>Phone number</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -12,7 +13,29 @@
       <td><span>{{user.username}}</span></td>
       <td><span>{{user.emailaddress}}</span></td>
       <td><span>{{user.phonenumber}}</span></td>
+      <td>
+        <button class="btn btn-sm btn-warning" (click)="openAdd(contentAdd, user)">
+          <i class="fa fa-edit"></i>Add friend</button>
+      </td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #contentAdd let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add game</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to add this friend.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onAdd()">Yes, Added!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>

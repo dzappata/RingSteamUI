@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Game} from "../game/game.component";
 
 export class User {
   constructor(
@@ -24,9 +25,11 @@ export class User {
 })
 export class UsersComponent implements OnInit{
   users: User[] | undefined;
+  private userId : number | undefined;
 
   constructor(
-  private httpClient: HttpClient
+  private httpClient: HttpClient,
+  private modalService: NgbModal
   ) {
   }
 
@@ -43,4 +46,22 @@ export class UsersComponent implements OnInit{
   ngOnInit(): void {
     this.getUsers();
   }
+
+  openAdd(targetModal: any, user: User) {
+    this.userId = user.id;
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+  }
+
+  onAdd() {
+    const addURL = 'http://localhost:8080/users/' + '1/' + this.userId + '/addfriend';
+    this.httpClient.post(addURL,this.userId)
+      .subscribe((results) => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
+  }
+
 }

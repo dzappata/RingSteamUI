@@ -24,7 +24,7 @@
       <td>
         <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, game)">
           <i class="fa fa-search"></i>Details</button>
-        <button class="btn btn-sm btn-warning">
+        <button class="btn btn-sm btn-warning" (click)="openAdd(contentAdd, game)">
           <i class="fa fa-edit"></i>Add</button>
       </td>
     </tr>
@@ -112,5 +112,23 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #contentAdd let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add game</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to add this game.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onAdd()">Yes, Added!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
   </div>
 </ng-template>

@@ -27,6 +27,7 @@ export class Game {
 export class GameComponent implements OnInit{
   games: Game[] | undefined;
   closeResult: string | undefined;
+  private gameId : number | undefined;
 
   constructor(
     private httpClient: HttpClient,
@@ -34,7 +35,7 @@ export class GameComponent implements OnInit{
   ) {
   }
 
-  getUsers(){
+  getGames(){
     // @ts-ignore
     this.httpClient.get<any>('http://localhost:8080/games').subscribe(
       response => {
@@ -45,7 +46,7 @@ export class GameComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getGames();
   }
 
   open(content: any) {
@@ -91,4 +92,22 @@ export class GameComponent implements OnInit{
     document.getElementById('cost2').setAttribute('value', String(game.cost));
   }
 
+  openAdd(targetModal: any, game: Game) {
+    this.gameId = game.id;
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+  }
+
+  onAdd() {
+    const addURL = 'http://localhost:8080/users/' + '1/' + this.gameId + '/addgame';
+    this.httpClient.post(addURL,this.gameId)
+      .subscribe((results) => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
+  }
+
 }
+
