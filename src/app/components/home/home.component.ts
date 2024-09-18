@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {JwtService} from "../../service/jwt.service";
 
 @Component({
   selector: 'app-home',
@@ -12,9 +11,7 @@ export class HomeComponent {
 
   message: string | null | undefined;
 
-  constructor(
-    private service: JwtService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.message=localStorage.getItem('username');
