@@ -56,7 +56,7 @@ export class UsersComponent implements OnInit{
   }
 
   onAdd() {
-    const addURL = 'http://localhost:8080/users/' + '1/' + this.userId + '/addfriend';
+    const addURL = 'http://localhost:8080/users/' + localStorage.getItem('id')+'/' + this.userId + '/addfriend';
     this.httpClient.post(addURL,this.userId)
       .subscribe((results) => {
         this.ngOnInit();

@@ -35,7 +35,7 @@ export class FriendComponent implements OnInit{
 
   getUsers(){
     // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/users/1/friends').subscribe(
+    this.httpClient.get<any>('http://localhost:8080/users/'+ localStorage.getItem('id')+'/friends').subscribe(
       response => {
         console.log(response);
         this.friends = response;
@@ -56,7 +56,7 @@ export class FriendComponent implements OnInit{
   }
 
   onDelete() {
-    const deleteURL = 'http://localhost:8080/users/1/' + this.deleteId + '/delfriend';
+    const deleteURL = 'http://localhost:8080/users/'+ localStorage.getItem('id')+'/' + this.deleteId + '/delfriend';
     this.httpClient.delete(deleteURL)
       .subscribe((results) => {
         this.ngOnInit();
