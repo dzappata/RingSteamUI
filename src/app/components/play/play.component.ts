@@ -73,22 +73,24 @@ export class PlayComponent  implements OnInit{
 
   openDetails(targetModal: any, game: Game) {
     this.gameId = game.id;
+
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
       size: 'lg'
     });
 
-    // @ts-ignore
+    debugger;
     this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+'/' + + this.gameId+ '/totalhours').subscribe(
-      response => {
+      (response) => {
         console.log(response);
         this.totalhours =response;
+        // @ts-ignore
+        document.getElementById('hour2').setAttribute('value', this.totalhours);
       }
     );
 
-    // @ts-ignore
-    document.getElementById('hour2').setAttribute('value', this.totalhours);
+
   }
 
 }

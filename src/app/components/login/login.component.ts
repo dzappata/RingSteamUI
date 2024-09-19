@@ -23,7 +23,7 @@ export class LoginComponent {
       sessionStorage.setItem('token', response.jwt);
       sessionStorage.setItem('username', response.username);
       sessionStorage.setItem('id', response.id);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']).then(() => { window.location.reload(); });
     }, error => {
       alert('Incorrect username or password');
     });

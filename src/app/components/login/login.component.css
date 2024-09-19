@@ -1,13 +1,11 @@
 /* login.component.scss */
 
 .container {
-  max-width: 400px;
-  margin: auto;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f8f9fa;
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 h2 {

@@ -8,7 +8,7 @@ import {GameComponent} from "./components/game/game.component";
 import {PlayComponent} from "./components/play/play.component";
 import {FriendComponent} from "./components/friend/friend.component";
 import {ProfileComponent} from "./components/profile/profile.component";
-import {LogoutComponent} from "./logout/logout.component";
+import {LogoutComponent} from "./components/logout/logout.component";
 
 //export const routes: Routes = [
  // {path: 'register', component: RegisterComponent},

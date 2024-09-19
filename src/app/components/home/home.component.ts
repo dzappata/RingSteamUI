@@ -14,7 +14,7 @@ export class HomeComponent {
   constructor() { }
 
   ngOnInit() {
-    this.message=localStorage.getItem('username');
+    this.message=sessionStorage.getItem('username');
   }
 
 }
