@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.httpClient.get<any>('http://localhost:8080/users/' + localStorage.getItem('id')).subscribe(
+    this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')).subscribe(
       response => {
         console.log(response);
         this.user.id = response.id;
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   }
 
   update() {
-    const editURL = 'http://localhost:8080/users/' + localStorage.getItem('id');
+    const editURL = 'http://localhost:8080/users/' + sessionStorage.getItem('id');
     console.log(this.user);
     this.httpClient.put(editURL, this.user)
       .subscribe((results) => {

@@ -101,7 +101,7 @@ export class GameComponent implements OnInit{
   }
 
   onAdd() {
-    const addURL = 'http://localhost:8080/users/' + localStorage.getItem('id')+'/' + this.gameId + '/addgame';
+    const addURL = 'http://localhost:8080/users/' + sessionStorage.getItem('id')+'/' + this.gameId + '/addgame';
     this.httpClient.post(addURL,this.gameId)
       .subscribe((results) => {
         this.ngOnInit();

@@ -20,9 +20,9 @@ export class LoginComponent {
   login() {
     this.authService.login(this.credentials).subscribe(
       (response) => {
-      localStorage.setItem('token', response.jwt);
-      localStorage.setItem('username', response.username);
-      localStorage.setItem('id', response.id);
+      sessionStorage.setItem('token', response.jwt);
+      sessionStorage.setItem('username', response.username);
+      sessionStorage.setItem('id', response.id);
       this.router.navigate(['/home']);
     }, error => {
       alert('Incorrect username or password');

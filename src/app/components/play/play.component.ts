@@ -41,7 +41,7 @@ export class PlayComponent  implements OnInit{
 
   getGames(){
     // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/users/' + localStorage.getItem('id')+ '/games').subscribe(
+    this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+ '/games').subscribe(
       response => {
         console.log(response);
         this.games = response;
@@ -80,7 +80,7 @@ export class PlayComponent  implements OnInit{
     });
 
     // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/users/' + localStorage.getItem('id')+'/' + + this.gameId+ '/totalhours').subscribe(
+    this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+'/' + + this.gameId+ '/totalhours').subscribe(
       response => {
         console.log(response);
         this.totalhours =response;
