@@ -8,7 +8,7 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './register.component.html',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
   ],
   styleUrls: ['./register.component.css']
 })
@@ -19,10 +19,17 @@ export class RegisterComponent {
 
   register() {
     debugger;
-    this.authService.register(this.user).subscribe(() => {
-      this.router.navigate(['/login']);
-    }, error => {
-      console.error('Registration error: ', error);
-    });
+    if (this.user.username === '' || this.user.password === '' || this.user.password === '') {
+      alert("please enter all fields");
+    }
+    else {
+      this.authService.register(this.user).subscribe(
+        (response) => {
+          alert(response.message);
+          if (response.statusCode == 201) {
+            this.router.navigate(['/login']);
+          }
+        });
+    }
   }
 }
