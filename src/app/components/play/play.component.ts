@@ -40,6 +40,7 @@ export class PlayComponent  implements OnInit{
   }
 
   getGames(){
+    debugger;
     // @ts-ignore
     this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+ '/games').subscribe(
       response => {

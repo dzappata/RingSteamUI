@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,16 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  private readonly platformId = inject(PLATFORM_ID);
+
   message: string | null | undefined;
 
   constructor() { }
 
   ngOnInit() {
-    this.message=sessionStorage.getItem('username');
+    if (isPlatformBrowser(this.platformId)) {
+      this.message = sessionStorage.getItem('username');
+    }
   }
 
 }

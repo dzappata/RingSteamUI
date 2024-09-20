@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser, NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, NgForm} from "@angular/forms";
 
 export class Game {
+
   constructor(
     public id: number,
     public title: string,
@@ -28,6 +29,8 @@ export class GameComponent implements OnInit{
   games: Game[] | undefined;
   closeResult: string | undefined;
   private gameId : number | undefined;
+
+  private readonly platformId = inject(PLATFORM_ID);
 
   constructor(
     private httpClient: HttpClient,
@@ -101,12 +104,14 @@ export class GameComponent implements OnInit{
   }
 
   onAdd() {
-    const addURL = 'http://localhost:8080/users/' + sessionStorage.getItem('id')+'/' + this.gameId + '/addgame';
-    this.httpClient.post(addURL,this.gameId)
-      .subscribe((results) => {
-        this.ngOnInit();
-        this.modalService.dismissAll();
-      });
+    if (isPlatformBrowser(this.platformId)) {
+      const addURL = 'http://localhost:8080/users/' + sessionStorage.getItem('id') + '/' + this.gameId + '/addgame';
+      this.httpClient.post(addURL, this.gameId)
+        .subscribe((results) => {
+          this.ngOnInit();
+          this.modalService.dismissAll();
+        });
+    }
   }
 
 }

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {NgIf} from "@angular/common";
+import {isPlatformBrowser, NgIf} from "@angular/common";
 import {debug} from "node:util";
 
 @Component({
@@ -11,6 +11,7 @@ import {debug} from "node:util";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  private readonly platformId = inject(PLATFORM_ID);
   title = 'RingSteamUI';
   loginbutton=true;
   registerbutton=true;
@@ -18,17 +19,18 @@ export class AppComponent implements OnInit {
   homebutton=false;
 
   ngOnInit() {
-    if (sessionStorage.getItem('token') !== null){
-      this.loginbutton=false;
-      this.registerbutton=false;
-      this.logoutbutton=true;
-      this.homebutton=true;
-    }
-    else {
-      this.loginbutton=true;
-      this.registerbutton=true;
-      this.logoutbutton=false;
-      this.homebutton=false;
+    if (isPlatformBrowser(this.platformId)) {
+      if (sessionStorage.getItem('token') !== null) {
+        this.loginbutton = false;
+        this.registerbutton = false;
+        this.logoutbutton = true;
+        this.homebutton = true;
+      } else {
+        this.loginbutton = true;
+        this.registerbutton = true;
+        this.logoutbutton = false;
+        this.homebutton = false;
+      }
     }
   }
 }
