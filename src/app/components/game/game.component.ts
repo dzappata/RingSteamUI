@@ -2,7 +2,7 @@ import {Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser, NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 
 export class Game {
 
@@ -20,7 +20,8 @@ export class Game {
   standalone: true,
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
@@ -39,17 +40,19 @@ export class GameComponent implements OnInit{
   ) {
   }
 
-  getGames(){
-    // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/games').subscribe(
-      response => {
-        console.log(response);
-        this.games = response;
-      }
-    );
+  getGames() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.httpClient.get<any>('http://localhost:8080/games').subscribe(
+        response => {
+          console.log(response);
+          this.games = response;
+        }
+      );
+    }
   }
 
   ngOnInit(): void {
+    debugger;
     this.getGames();
   }
 

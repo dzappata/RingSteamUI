@@ -10,16 +10,6 @@ import {FriendComponent} from "./components/friend/friend.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 
-//export const routes: Routes = [
- // {path: 'register', component: RegisterComponent},
- // {path: 'login', component: LoginComponent},
- // {path: 'home', component: HomeComponent},  //canActivate: [AuthenticationGuard]
- // {path: 'users', component: UsersComponent},
- // {path: 'games', component: GameComponent},
- // {path: 'users/:id/games', component: PlayComponent},
- // {path: 'users/:id/friends', component: FriendComponent}
-//];
-
 export const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},

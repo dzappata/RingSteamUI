@@ -36,12 +36,13 @@ export class UsersComponent implements OnInit{
   }
 
   getUsers() {
-    // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/users').subscribe(
-      response => {
-        console.log(response);
-        this.users = response;
-      });
+    if (isPlatformBrowser(this.platformId)) {
+      this.httpClient.get<any>('http://localhost:8080/users').subscribe(
+        response => {
+          console.log(response);
+          this.users = response;
+        });
+    }
   }
 
   ngOnInit(): void {
