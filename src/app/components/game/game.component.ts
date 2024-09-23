@@ -52,7 +52,6 @@ export class GameComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    debugger;
     this.getGames();
   }
 
