@@ -36,12 +36,13 @@
       <div class="form-group">
         <label for="hour">Hours</label>
         <div class="input-group">
-          <input id="hour2" class="form-control" readonly>
+          <input id="hour2" class="form-control">
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateHours()">Update</button>
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>

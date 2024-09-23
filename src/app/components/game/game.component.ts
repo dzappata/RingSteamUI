@@ -29,6 +29,7 @@ export class GameComponent implements OnInit{
   games: Game[] | undefined;
   closeResult: string | undefined;
   private gameId : number | undefined;
+  private totalhours: number | undefined;
 
   private readonly platformId = inject(PLATFORM_ID);
 
@@ -93,6 +94,16 @@ export class GameComponent implements OnInit{
     document.getElementById('rating2').setAttribute('value', String(game.rating));
     // @ts-ignore
     document.getElementById('cost2').setAttribute('value', String(game.cost));
+
+    this.httpClient.get<any>('http://localhost:8080/games/' + game.id + '/totalhours').subscribe(
+      (response) => {
+        console.log(response);
+        this.totalhours =response;
+        // @ts-ignore
+        document.getElementById('hours').setAttribute('value', this.totalhours);
+      }
+    );
+
   }
 
   openAdd(targetModal: any, game: Game) {

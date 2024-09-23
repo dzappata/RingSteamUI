@@ -1,8 +1,5 @@
 import {Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {isPlatformBrowser} from "@angular/common";

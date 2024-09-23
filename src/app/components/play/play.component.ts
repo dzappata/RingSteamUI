@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {FormsModule, ReactiveFormsModule, NgForm} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+import {isPlatformBrowser, NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {response} from "express";
 
 export class Game {
   constructor(
@@ -33,6 +32,8 @@ export class PlayComponent  implements OnInit{
   private gameId : number | undefined;
   private totalhours: number | undefined;
 
+  private readonly platformId = inject(PLATFORM_ID);
+
   constructor(
     private httpClient: HttpClient,
     private modalService: NgbModal
@@ -40,14 +41,14 @@ export class PlayComponent  implements OnInit{
   }
 
   getGames(){
-    debugger;
-    // @ts-ignore
-    this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+ '/games').subscribe(
-      response => {
-        console.log(response);
-        this.games = response;
-      }
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id') + '/games').subscribe(
+        response => {
+          console.log(response);
+          this.games = response;
+        }
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -81,17 +82,31 @@ export class PlayComponent  implements OnInit{
       size: 'lg'
     });
 
-    debugger;
-    this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id')+'/' + + this.gameId+ '/totalhours').subscribe(
-      (response) => {
-        console.log(response);
-        this.totalhours =response;
-        // @ts-ignore
-        document.getElementById('hour2').setAttribute('value', this.totalhours);
-      }
-    );
-
-
+    if (isPlatformBrowser(this.platformId)) {
+      this.httpClient.get<any>('http://localhost:8080/users/' + sessionStorage.getItem('id') + '/' + +this.gameId + '/totalhours').subscribe(
+        (response) => {
+          console.log(response);
+          this.totalhours = response;
+          // @ts-ignore
+          document.getElementById('hour2').setAttribute('value', this.totalhours);
+        }
+      );
+    }
   }
 
+  updateHours(){
+    if (isPlatformBrowser(this.platformId)) {
+      const editURL = 'http://localhost:8080/users/' + sessionStorage.getItem('id')+'/'+this.gameId + '/edithours';
+      console.log(this.totalhours);
+      debugger;
+      // @ts-ignore
+      this.totalhours= document.getElementById('hour2');
+      this.httpClient.put(editURL, this.totalhours)
+        .subscribe((results) => {
+          alert('Update successful')
+          this.ngOnInit();
+          this.modalService.dismissAll();
+        });
+    }
+  }
 }
